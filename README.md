@@ -1,22 +1,18 @@
-# Um Treinador Pokémon possui algumas características
+# CRUD de Treinadores Pokémon 
 
-[] Nome
-[] Idade
-[] Cidade natal
+Um Treinador Pokémon possui algumas características:
+[x] Nome
+[x] Idade
+[x] Cidade natal
 
-Para adição e alteração
+Para adição e alteração:
+[x] O nome, idade são obrigatórios
+[x] O nome precisa ter pelo menos 5 caracteres
+[x] A idade precisa ser maior ou igual a 15 anos e menor que 40 anos
+[x] Serão aceitas somente as cidades Pallet e Vermelion
 
-[] O nome, idade são obrigatórios
-[] O nome precisa ter pelo menos 5 caracteres
-[] A idade precisa ser maior ou igual a 15 anos e menor que 40 anos
-[] Serão aceitas somente as cidades Pallet e Vermelion
+Em caso de alteração:
+[x] O treinador pokémon precisa estar cadastrado no sistema
 
-Alteração apenas
-
-[] O treinador pokémon precisa estar cadastrado no sistema
-
-Ler e deletar
-
-[] Validar se o treinador pokémon solicitado existe na plataforma
-
-Usar try catch!!!!!!!!!!
+Ler e deletar:
+[x] Validar se o treinador pokémon solicitado existe na plataforma
