@@ -4,11 +4,13 @@ const data = require('../../../data/CoachData.json');
 const DeleteCoachService = {
     deleteCoach: (id)=>{
         const indexCoach = data.findIndex(item => item.id === id);
-        if(id === -1){
-            throw new Error('Treinador pokemon não existe.')
+        if(indexCoach === -1){
+            const error = 'Treinador pokemon não existe.'
+            return {error: error}
         }
-        data.slice(indexCoach, 1);
-        fs.readFileSync(__dirname + '/../../../data/CoachData.json', JSON.stringify(data));
+        data.splice(indexCoach, 1);
+        fs.writeFileSync(__dirname + '/../../../data/CoachData.json', JSON.stringify(data));
+        return {status: 'sucess'}
     }
 }
 

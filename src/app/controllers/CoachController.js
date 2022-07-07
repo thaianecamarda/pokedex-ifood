@@ -6,62 +6,53 @@ const DeleteCoachService = require('../services/DeleteCoachService');
 const controllerCoach = {
     create: (req, res)=>{
         const { name, age, city } = req.body;
-        try {
-            if(!name || !age){
-                res.status(404).json('Nome e idade são obrigatórios.');
-                return;
-            }
-            const coach = CreateCoachService.createCoach(name, age, city);
-            res.status(201).json(coach);
-        } catch (error) {
-            console.log(error);
-            res.status(404).json(error); 
+        if(!name || !age){
+            res.status(404).json('Nome e idade são obrigatórios.');
+            return;
         }
+        const coach = CreateCoachService.createCoach(name, age, city);
+        if(coach.error){
+            res.status(404).json(coach);
+            return;
+        }
+        res.status(201).json(coach);
     },
     list: (req, res)=>{
-        const { id } = req.params
+        const { id } = req.body;
         let result = {};
-        try {
-            if(id){
-                result = ListCoachService.listOneCoach(id);
-                res.status(200).json(result);
+        if(id){
+            result = ListCoachService.listOneCoach(id);
+            if(result.error){
+                res.status(404).json(result);
                 return;
             }
-            result = ListCoachService.listCoach()
-            res.status(200).json(result); 
-        } catch (error) {
-           console.log(error);
-           res.status(404).json(error); 
+            res.status(200).json(result);
+            return;
         }
+        result = ListCoachService.listCoach()
+        res.status(200).json(result); 
     },
     update: (req, res)=>{
         const { id } =  req.params;
-        const { name, age, city } = req.body;
-        if(!name || !age){
+        const params = req.body;
+        if(!params.name || !params.age){
             res.status(404).json('Nome e idade são obrigatórios.');
         }
-        try {
-            const coach = {
-                name,
-                age,
-                city
-            }
-            const result = UpdateCoachService.updateCoach(id, coach);
-            res.status(200).json(result);
-        } catch (error) {
-           console.log(error);
-           res.status(404).json(error); 
+        const result = UpdateCoachService.updateCoach(id, params);
+        if(result.error){
+            res.status(404).json(result);
+            return;
         }
+        res.status(200).json(result); 
     },
     delete: (req, res)=>{
         const { id } = req.params;
-        try {
-            const result = DeleteCoachService.deleteCoach(id);
-            res.status(200).json(result);   
-        } catch (error) {
-            console.log(error);
-            res.status(404).json(error);
+        const result = DeleteCoachService.deleteCoach(id);
+        if(result.error){
+            res.status(404).json(result);
+            return;
         }
+        res.status(200).json(result);
     }
 }
 

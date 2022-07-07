@@ -7,7 +7,8 @@ const ListCoachService = {
     listOneCoach: (id)=>{
         const coach = data.find(item => item.id === id);
         if(!coach){
-            throw new Error('Treinador pokemon não existe.');
+            const error = 'Treinador pokemon não existe.'
+            return {error: error}
         }
         return coach;
     }
